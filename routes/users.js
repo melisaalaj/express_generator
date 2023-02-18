@@ -17,9 +17,18 @@ router.get('/', function(req, res, next) {
 
   event.addListener('testEvent', testEventFun)
 
-  event.emit('testEvent');
+  const eventObj = () => {
+    const obj1 = {init: 'Node', version: 18};
+    console.log(obj1);
+  }
 
-  console.log(event.listenerCount(event))
+  event.addListener('event1', eventObj);
+
+  event.emit('testEvent');
+  event.emit('event1');
+
+  console.log(event.listenerCount('event1'))
+  event.removeListener('testEvent', testEventFun);
 
   res.send('');
 });
