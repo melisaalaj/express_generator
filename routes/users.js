@@ -4,24 +4,35 @@ const EventEmitter = require('events');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  
   const event = new EventEmitter();
 
-  const runEventListener = () => {
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  class Counter extends EventEmitter {
+    //value; 
 
-    let even = [];
-      for(let i = 0; i < numbers.length; i++) {
-       if(numbers[i] % 2 == 0)
-       even.push(numbers[i]);
-      }
-  
-      console.log(`Even numbers in an array are: ${even}`);
+    constructor(value) {
+      super();
+      this._value = value;
   }
 
-  event.addListener('EvenEvent', runEventListener)
+    get getValue() {
+      console.log(this._name)
+    }
 
-  event.emit('runEvent_1')
+    set setValue(newValue) {
+      this.value = newValue;
+      event.emit('increment', this.value);
+    }
 
+  }
+
+  const counter = new Counter(2);
+  
+  event.addListener('increment', (value)=> {
+    console.log("Counter value: " + counter.getValue());
+    counter.setValue= 4;
+  })
+  
   res.send('');
 });
 
