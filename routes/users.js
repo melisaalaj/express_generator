@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const EventEmitter = require('events');
 
 /* GET users listing. */
@@ -7,28 +7,20 @@ router.get('/', function(req, res, next) {
   const event = new EventEmitter();
 
   const runEventListener = () => {
-    return ("Hello from events");
-  }
-  event.addListener('runEvent_1', runEventListener)
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const testEventFun = ()=> {
-    console.log("only test");
-  }
-
-  event.addListener('testEvent', testEventFun)
-
-  const eventObj = () => {
-    const obj1 = {init: 'Node', version: 18};
-    console.log(obj1);
+    let even = [];
+      for(let i = 0; i < numbers.length; i++) {
+       if(numbers[i] % 2 == 0)
+       even.push(numbers[i]);
+      }
+  
+      console.log(`Even numbers in an array are: ${even}`);
   }
 
-  event.addListener('event1', eventObj);
+  event.addListener('EvenEvent', runEventListener)
 
-  event.emit('testEvent');
-  event.emit('event1');
-
-  console.log(event.listenerCount('event1'))
-  event.removeListener('testEvent', testEventFun);
+  event.emit('runEvent_1')
 
   res.send('');
 });
