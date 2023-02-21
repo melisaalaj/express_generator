@@ -1,38 +1,40 @@
 const express = require('express');
 const router = express.Router();
-const EventEmitter = require('events');
+const os = require('os');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  
-  const event = new EventEmitter();
+  const eol = os.EOL
+  console.log(eol);
 
-  class Counter extends EventEmitter {
-    //value; 
+  const netInt = os.networkInterfaces()
+  console.log(netInt);
 
-    constructor(value) {
-      super();
-      this._value = value;
-  }
+  const OsArch = os.arch
+  console.log("Arch: " + OsArch);
 
-    get getValue() {
-      console.log(this._name)
-    }
+  const osCpus = os.cpus()
+  console.log( osCpus)
 
-    set setValue(newValue) {
-      this.value = newValue;
-      event.emit('increment', this.value);
-    }
+  const osDevNull = os.devNull
+  console.log("Dev Null" + osDevNull);
 
-  }
+  const osEndians = os.endianness
+  console.log("Endians: " + osEndians);
 
-  const counter = new Counter(2);
-  
-  event.addListener('increment', (value)=> {
-    console.log("Counter value: " + counter.getValue());
-    counter.setValue= 4;
-  })
-  
+  const freeMemory = os.freemem
+  console.log("Free memory: " + freeMemory);
+
+  const  homeDir = os.homedir
+  console.log("Home directory: " + homeDir);
+
+  const  hostName = os.hostname
+  console.log("Host name: " + hostName);
+
+  const loadAvg = os.loadavg()
+  console.log(loadAvg);
+
+
   res.send('');
 });
 
