@@ -10,19 +10,18 @@ const promis = new Promise((resolve, reject) => {
         resolve()
     } });
 
-    
-
 });
 
 const promisRead = new Promise((resolve, reject) => {
 
-    readFile('mynewfile3.txt', (err) => {
+    fs.readFile('mynewfile3.txt', (err) => {
         if(err){
             reject()
         } else {
             resolve()
         } 
     });
+
 })
 
 promis.then(function () {
@@ -32,7 +31,7 @@ promis.then(function () {
 })
 
 promisRead.then(function () {
-    console.log('File readen successfully!')
+    console.log('File read successfully!')
 }).catch(function() {
     console.log('Could not read file')
 })
