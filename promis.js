@@ -1,22 +1,19 @@
-const fs = require('fs')
+function reverseString(str) {
+    return new Promise((resolve, reject) => {
+      if (typeof str !== 'string') {
+        reject(new Error('Input must be a string'));
+      } else {
+        const reversed = str.split('').reverse().join('');
+        resolve(reversed);
+      }
+    });
+  }
 
-
-const promis = new Promise((resolve, reject) => {
-
-    fs.readdir(__dirname, (err, files) => {
-        if (err)
-          reject()
-        else {
-          resolve(files)
-        }
-      })
-
-});
-
-
-promis.then((files) => {
-        console.log(files);
-}).catch(function() {
-    console.log('Could not read directory!')
-})
+  reverseString('Hello')
+  .then((reversed) => {
+    console.log(reversed); 
+  })
+  .catch((error) => {
+    console.error(error); 
+  });
 
